@@ -1,5 +1,6 @@
 package tn.esprit.se.projet1.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,6 +18,7 @@ import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
+
 @Table( name = "Bloc")
 public class Bloc  {
     @Id
@@ -25,9 +27,10 @@ public class Bloc  {
     private long idBloc;
     private String nomBloc;
     private long capaciteBloc;
+    @JsonIgnore
     @ManyToOne
     Foyer foyer;
-
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy="bloc", fetch = FetchType.EAGER)//bloc chambre
     private Set<Chambre> chambres;
 

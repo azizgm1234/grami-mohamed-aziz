@@ -44,7 +44,7 @@ public class ReservationController {
         return reservation;
     }
 
-    @GetMapping("/getReservationParAnneeUniversitaire/{dateDebut}/{dateFin}")
+    @GetMapping("/Reservationannee/{dateDebut}/{dateFin}")
     public List<Reservation> getReservationParAnneeUniversitaire(@PathVariable  @DateTimeFormat(pattern="yyyy-MM-dd") Date dateDebut, @PathVariable  @DateTimeFormat(pattern="yyyy-MM-dd") Date dateFin) {
         List<Reservation> reservation = iReservationService.getReservationParAnneeUniversitaire(dateDebut, dateFin);
         return reservation;

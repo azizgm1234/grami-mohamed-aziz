@@ -5,5 +5,5 @@ import tn.esprit.se.projet1.entites.Universite;
 
 public interface UniversiteRepository extends JpaRepository<Universite,Long> {
 
-    Universite findByNomUniversite(String nomUniversite);
+    Universite findByNomUniveriste(String nomUniveriste);
 }

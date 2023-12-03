@@ -1,4 +1,5 @@
 package tn.esprit.se.projet1.entites;
+        import com.fasterxml.jackson.annotation.JsonIgnore;
         import jakarta.persistence.*;
         import lombok.AllArgsConstructor;
         import lombok.Getter;
@@ -22,10 +23,10 @@ public class Foyer implements Serializable {
     private Long capcitefoyer;
     private boolean archived = false;
 // Constructeur et accesseurs (getters) et mutateurs (setters)
-
+@JsonIgnore
 @OneToOne(mappedBy="foyer") //foyer universite
 private Universite universite;
-
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy="foyer")
     private Set<Bloc> bloc;
 

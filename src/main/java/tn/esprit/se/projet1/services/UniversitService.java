@@ -45,9 +45,9 @@ public class UniversitService implements IUniverstService{
     }
     @Override
 
-    public Universite affecterFoyerAUniversite(long idFoyer, String nomUniversite) {
+    public Universite affecterFoyerAUniversite(long idFoyer, String nomUniveriste) {
         Foyer foyer=foyerRepository.findById( idFoyer).get();
-        Universite universite=universitRepository.findByNomUniversite(nomUniversite);
+        Universite universite=universitRepository.findByNomUniveriste(nomUniveriste);
         universite.setFoyer(foyer);
         universitRepository.save(universite);
         return universite;

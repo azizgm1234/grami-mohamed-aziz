@@ -1,4 +1,5 @@
 package tn.esprit.se.projet1.entites;
+        import com.fasterxml.jackson.annotation.JsonIgnore;
         import jakarta.persistence.*;
         import lombok.AllArgsConstructor;
         import lombok.Getter;
@@ -21,6 +22,7 @@ public class Universite implements Serializable {
     private String nomUniveriste;
     private String adresse;
 // Constructeur et accesseurs (getters) et mutateurs (setters)
+    @JsonIgnore
 
     @OneToOne
     private Foyer foyer;

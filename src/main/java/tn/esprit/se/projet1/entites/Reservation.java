@@ -1,5 +1,6 @@
 
 package tn.esprit.se.projet1.entites;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,7 +24,7 @@ public class Reservation implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date anneeUniversitaire;
 
-
+    @JsonIgnore
 @ManyToMany(cascade = CascadeType.ALL)//etudiant reservation
 private Set<Etudiant> etudiant;
 }

@@ -12,6 +12,7 @@ import tn.esprit.se.projet1.repository.ChambreRepository;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -50,19 +51,23 @@ public class ChambreService implements IChambreService{
     public Bloc affecterChambresABloc(List<Long> numChambre, String nomBloc) {
         Bloc bloc = blocRepository.findBynomBloc(nomBloc);
 
-        for (Long numero : numChambre) {
-            Chambre chambre = chambreRepository.findbynumchambre(numero);
-            chambre.setBloc(bloc);
-            chambreRepository.save(chambre);
+        if (bloc != null) {
+            for (Long numero : numChambre) {
+                Chambre chambre = chambreRepository.findByNumeroChambre(numero);
+                chambre.setBloc(bloc);
+                chambreRepository.save(chambre);
+            }
+            blocRepository.save(bloc);
+            return bloc;
+        } else {
+            // Handle the case when Bloc with the given nomBloc is not found
+            return null;
         }
-        blocRepository.save(bloc);
-        return bloc;
-
     }
     @Override
     public Bloc desaffecterChambreDeBloc(List<Long> numChambre) {
         for (Long numero : numChambre) {
-            Chambre chambre = chambreRepository.findbynumchambre(numero);
+            Chambre chambre = chambreRepository.findByNumeroChambre(numero);
             if (chambre != null) {
                 chambre.setBloc(null);
                 chambreRepository.save(chambre);
@@ -75,8 +80,31 @@ public class ChambreService implements IChambreService{
         Bloc bloc = blocRepository.findBynomBloc(nomBloc);
         Set<Chambre> chambres = bloc.getChambres();
         List<Chambre> chambreList = new ArrayList<>(chambres);
-        return chambreList;
+        chambreList.forEach(ch->{
+            log.info("num" +ch.getNumeroChambre());
+        });
+return chambreList;
     }
+
+    @Override
+    public List<Long> getChambresParNomBloc2(String nomBloc) {
+        Bloc bloc = blocRepository.findBynomBloc(nomBloc);
+
+        if (bloc != null) {
+            Set<Chambre> chambres = bloc.getChambres();
+            List<Long> chambreNumbers = new ArrayList<>();
+
+            chambres.forEach(ch -> {
+                chambreNumbers.add(ch.getNumeroChambre());
+            });
+
+            return chambreNumbers;
+        } else {
+
+            return Collections.emptyList();
+        }
+    }
+
     @Override
     public long nbChambreParTypeEtBloc(TypeChambre type, long idBloc){
         Bloc bloc = blocRepository.findById(idBloc).get();
@@ -105,6 +133,27 @@ public class ChambreService implements IChambreService{
                     log.info("chambre numero " + cha.getNumeroChambre() + " de type " + cha.getTypecC())
             );
         });
+
+    }
+    @Scheduled(fixedRate = 50000)
+    public void pourcentageChambreParTypeChambre() {
+
+        List<Chambre> chambres = chambreRepository.findAll();
+        int nbTotalChambres = chambres.size();
+
+        log.info("nbTotalsChambres : {}", nbTotalChambres);
+
+        for (TypeChambre typeChambre : TypeChambre.values()) {
+            long countByType = chambres.stream()
+                    .filter(chambre -> chambre.getTypecC() == typeChambre)
+                    .count();
+
+            double percentage = (countByType * 100.0) / nbTotalChambres;
+
+            log.info("Le pourcentage des chambres de type {} est égal à {}", typeChambre, percentage );
+        };
+
+        log.info("fin de test poucentage");
     }
 
 

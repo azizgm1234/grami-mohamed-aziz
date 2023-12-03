@@ -1,4 +1,5 @@
 package tn.esprit.se.projet1.entites;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,10 +23,10 @@ public class Chambre implements Serializable {
     @Enumerated (EnumType.STRING)
     TypeChambre typecC;
 
-
+    @JsonIgnore
     @ManyToOne// chambre bloc
     Bloc bloc;
-
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Reservation> reservations;
 }

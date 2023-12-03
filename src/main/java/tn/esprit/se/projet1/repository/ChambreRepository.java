@@ -7,5 +7,9 @@ import java.util.List;
 
 public interface ChambreRepository extends JpaRepository<Chambre,Long> {
 
-    Chambre findbynumchambre(Long numero);
+
+
+
+
+    Chambre findByNumeroChambre(Long numero);
 }

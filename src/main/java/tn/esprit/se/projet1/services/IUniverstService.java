@@ -16,7 +16,7 @@ public interface IUniverstService {
 
     Universite removeUniversit(Long idUniversit);
 
-    Universite affecterFoyerAUniversite(long idFoyer, String nomUniversite);
+    Universite affecterFoyerAUniversite(long idFoyer, String nomUniveriste);
 
     Universite desaffecterFoyerAUniversite(long idUniversite);
 }
