@@ -20,6 +20,7 @@ public class Foyer implements Serializable {
     private Long idFoyert; // Clé primaire
     private String nomFoyer;
     private Long capcitefoyer;
+    private boolean archived = false;
 // Constructeur et accesseurs (getters) et mutateurs (setters)
 
 @OneToOne(mappedBy="foyer") //foyer universite

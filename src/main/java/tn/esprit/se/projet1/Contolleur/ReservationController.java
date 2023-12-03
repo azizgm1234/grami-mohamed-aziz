@@ -1,11 +1,13 @@
 package tn.esprit.se.projet1.Contolleur;
 
 import lombok.AllArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.se.projet1.entites.Reservation;
 import tn.esprit.se.projet1.services.IReservationService;
 
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -39,6 +41,12 @@ public class ReservationController {
     @PutMapping("/UpdateReservation")
     public Reservation updateFoyer(@RequestBody Reservation f) {
         Reservation reservation= iReservationService.updateReservation(f);
+        return reservation;
+    }
+
+    @GetMapping("/getReservationParAnneeUniversitaire/{dateDebut}/{dateFin}")
+    public List<Reservation> getReservationParAnneeUniversitaire(@PathVariable  @DateTimeFormat(pattern="yyyy-MM-dd") Date dateDebut, @PathVariable  @DateTimeFormat(pattern="yyyy-MM-dd") Date dateFin) {
+        List<Reservation> reservation = iReservationService.getReservationParAnneeUniversitaire(dateDebut, dateFin);
         return reservation;
     }
 }

@@ -6,4 +6,5 @@ import tn.esprit.se.projet1.entites.Etudiant;
 //JpaRepository
 //CrudRepository
 public interface EtudiantRepository extends JpaRepository <Etudiant,Long>{
+    Etudiant findByNomEtAndPrenomEt(String nomEt, String prenomEt);
 }

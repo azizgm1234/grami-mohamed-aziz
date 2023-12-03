@@ -7,13 +7,15 @@ import tn.esprit.se.projet1.entites.Reservation;
 import tn.esprit.se.projet1.repository.ReservationRepository;
 
 
+import java.util.Date;
 import java.util.List;
 
 @Service
 @Slf4j
 @AllArgsConstructor
-public class ReservationService implements IReservationService{
+public class ReservationService implements IReservationService {
     ReservationRepository reservationRepository;
+
     @Override
     public List<Reservation> retrieveAllReservations() {
         return reservationRepository.findAll();
@@ -36,6 +38,13 @@ public class ReservationService implements IReservationService{
 
     @Override
     public void removeReservation(String idReservation) {
-    reservationRepository.deleteById(idReservation);
+        reservationRepository.deleteById(idReservation);
+    }
+
+    @Override
+    public List<Reservation> getReservationParAnneeUniversitaire(Date dateDebut, Date dateFin) {
+        List<Reservation> reservation = reservationRepository.findByAnneeUniversitaireBetween(dateDebut, dateFin);
+
+        return reservation;
     }
 }
