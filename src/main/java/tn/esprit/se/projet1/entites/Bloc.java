@@ -14,6 +14,7 @@ import java.util.Set;
 @Entity
 @Getter // tebaa e lobok generer auto au moment de la compilation
 @Setter
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Table( name = "Bloc")
@@ -27,7 +28,7 @@ public class Bloc  {
     @ManyToOne
     Foyer foyer;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="bloc")//bloc chambre
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="bloc", fetch = FetchType.EAGER)//bloc chambre
     private Set<Chambre> chambres;
 
 }

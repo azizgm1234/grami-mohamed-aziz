@@ -2,6 +2,7 @@ package tn.esprit.se.projet1.services;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.esprit.se.projet1.entites.Bloc;
 import tn.esprit.se.projet1.repository.BlocRepository;
@@ -40,4 +41,6 @@ public class BlocService implements IBlocService{
     public void removeBloc(Long idBloc) {
         blocRepository.deleteById(idBloc);
     }
+
+
 }
